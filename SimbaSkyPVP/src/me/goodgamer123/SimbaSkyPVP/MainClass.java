@@ -1,31 +1,63 @@
 package me.goodgamer123.SimbaSkyPVP;
 
-import org.bukkit.Material;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Effect;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
-public class MainClass extends JavaPlugin implements Listener {
+public class MainClass extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		getServer().getPluginManager().registerEvents(this, this);
-	}
-	
-	@EventHandler
-    public void playerInteract(PlayerInteractEvent e) {
-		new BukkitRunnable() { 
-			@Override
+		getServer().getPluginManager().registerEvents(new InstaSoup(), this);
+		getServer().getPluginManager().registerEvents(new DisableBuilding(), this);
+		getServer().getPluginManager().registerEvents(new ProjectileTrails(), this);
+		
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
-				if (e.getPlayer().getItemInHand().getType().equals(Material.MUSHROOM_SOUP) && e.getPlayer().getFoodLevel() != 20) {
-					e.getPlayer().setItemInHand(new ItemStack(Material.AIR));
-					e.getPlayer().setFoodLevel(e.getPlayer().getFoodLevel() + 6);
+				for (Player p : Bukkit.getOnlinePlayers()) {
+					if (p.getHealth() <= 4) {
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(1, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 1, 0.5), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 2, 1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(1, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(1, 1, 1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(1, 2, 1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0.5, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 1, -1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 2, -1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(-0.5, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(-1, 1, 0.5), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0.5, 2, -1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+					}
 				}
 			}
-		}.runTaskLater(MainClass.getPlugin(MainClass.class), 3);
+		}, 20L, 20L);
+	}
+	
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (!(sender instanceof Player)) {
+			sender.sendMessage("You need to be a player to do this!");
+			return false;
+		}
+		
+		Player p = (Player) sender;
+		if (cmd.getName().equalsIgnoreCase("togglebuilding")) {
+			if (!DisableBuilding.building.contains(p)) {
+				DisableBuilding.building.add(p);
+				p.sendMessage(ChatColor.GREEN + "Buidling is now disabled!");
+			} else {
+				DisableBuilding.building.remove(p);
+				p.sendMessage(ChatColor.GREEN + "Buidling is now enabled!");
+			}
+		}
+		
+		return false;
 	}
 }
 
