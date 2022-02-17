@@ -9,3 +9,6 @@ commands:
   togglebuilding:
     description: toggle building.
     permission: disablebuilding.togglebuilding
+  ipwhitelist:
+    description: ip whitelist.
+    permission: ipwhitelist.ipwhitelist
