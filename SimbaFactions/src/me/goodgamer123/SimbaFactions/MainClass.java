@@ -14,6 +14,7 @@ public class MainClass extends JavaPlugin {
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(new DisableBuilding(), this);
 		getServer().getPluginManager().registerEvents(new ProjectileTrails(), this);
+		getServer().getPluginManager().registerEvents(new DeathEffect(), this);
 
 		getCommand("togglebuilding").setExecutor(this);
 		
