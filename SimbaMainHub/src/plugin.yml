@@ -1,0 +1,6 @@
+main: me.goodgamer123.SimbaMainHub.MainClass
+name:  JoinParticles
+version: 1.0.0
+api-version: 1.8
+author: goodgamer123
+description: Shows particles on join.
