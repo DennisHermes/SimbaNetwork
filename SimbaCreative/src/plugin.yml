@@ -1,0 +1,11 @@
+main: me.goodgamer123.SimbaCreative.MainClass
+name:  SimbaCreative
+version: 1.0.0
+api-version: 1.8
+author: goodgamer123
+description: SimbaCreative.
+
+commands:
+  togglebuilding:
+    description: toggle building.
+    permission: disablebuilding.togglebuilding
