@@ -1,0 +1,10 @@
+main: me.goodgamer123.SimbaEssentials.MainClass
+name:  SimbaEssentials
+version: 1.0.0
+api-version: 1.8
+author: goodgamer123
+description: SimbaEssentials.
+
+commands:
+  op:
+    description: op players.
