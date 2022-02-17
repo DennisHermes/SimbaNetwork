@@ -15,6 +15,7 @@ public class MainClass extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new InstaSoup(), this);
 		getServer().getPluginManager().registerEvents(new DisableBuilding(), this);
 		getServer().getPluginManager().registerEvents(new ProjectileTrails(), this);
+		getServer().getPluginManager().registerEvents(new DeathEffect(), this);
 		
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
