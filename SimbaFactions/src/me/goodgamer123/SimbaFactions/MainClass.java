@@ -1,26 +1,44 @@
 package me.goodgamer123.SimbaFactions;
 
-import java.util.HashMap;
-
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class MainClass extends JavaPlugin implements Listener {
-
-	static HashMap<Player, Boolean> building = new HashMap<Player, Boolean>();
+public class MainClass extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
-		getServer().getPluginManager().registerEvents(this, this);
+		getServer().getPluginManager().registerEvents(new DisableBuilding(), this);
+		getServer().getPluginManager().registerEvents(new ProjectileTrails(), this);
 
 		getCommand("togglebuilding").setExecutor(this);
+		
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+			public void run() {
+				for (Player p : Bukkit.getOnlinePlayers()) {
+					if (p.getHealth() <= 4) {
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(1, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 1, 0.5), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 2, 1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(1, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(1, 1, 1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(1, 2, 1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0.5, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 1, -1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0, 2, -1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(-0.5, 1, 0), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(-1, 1, 0.5), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+						p.getWorld().spigot().playEffect(p.getLocation().add(0.5, 2, -1), Effect.COLOURED_DUST, 0, 1, 255, 0, 0, 1, 0, 64);
+					}
+				}
+			}
+		}, 20L, 20L);
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -31,37 +49,16 @@ public class MainClass extends JavaPlugin implements Listener {
 		
 		Player p = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("togglebuilding")) {
-			if (!building.containsKey(p)) {
-				building.put(p, true);
+			if (!DisableBuilding.building.contains(p)) {
+				DisableBuilding.building.add(p);
 				p.sendMessage(ChatColor.GREEN + "Buidling is now enabled!");
 			} else {
-				if (building.get(p)) {
-					building.put(p, false);
-					p.sendMessage(ChatColor.GREEN + "Buidling is now disabled!");
-				} else {
-					building.put(p, true);
-					p.sendMessage(ChatColor.GREEN + "Buidling is now enabled!");
-				}
+				DisableBuilding.building.remove(p);
+				p.sendMessage(ChatColor.GREEN + "Buidling is now disabled!");
 			}
 		}
 		
 		return false;
-	}
-	
-	@EventHandler
-	public void blockPlace(BlockPlaceEvent e) {
-		if (e.getPlayer().isOp()) {
-			if (!building.containsKey(e.getPlayer())) e.setCancelled(true);
-			else if (!building.get(e.getPlayer())) e.setCancelled(true);
-		}
-	}
-	
-	@EventHandler
-	public void blockBreak(BlockBreakEvent e) {
-		if (e.getPlayer().isOp()) {
-			if (!building.containsKey(e.getPlayer())) e.setCancelled(true);
-			else if (!building.get(e.getPlayer())) e.setCancelled(true);
-		}
 	}
 	
 }
