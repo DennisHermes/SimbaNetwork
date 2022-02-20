@@ -18,6 +18,7 @@ public class MainClass extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new DisableBuilding(), this);
 		getServer().getPluginManager().registerEvents(new IpWhitelist(), this);
 		getServer().getPluginManager().registerEvents(new JoinParticles(), this);
+		getServer().getPluginManager().registerEvents(new AntiEastereggLooter(), this);
 		
 		FileConfiguration config = this.getConfig();
 		config.addDefault("IpWhitelist", false);
