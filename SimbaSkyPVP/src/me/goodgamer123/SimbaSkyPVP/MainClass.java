@@ -21,6 +21,9 @@ public class MainClass extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new DisableBuilding(), this);
 		getServer().getPluginManager().registerEvents(new ProjectileTrails(), this);
 		getServer().getPluginManager().registerEvents(new DeathEffect(), this);
+		getServer().getPluginManager().registerEvents(new PermanentAnvil(), this);
+		getServer().getPluginManager().registerEvents(new VoidKiller(), this);
+		getServer().getPluginManager().registerEvents(new AntiSelfBow(), this);
 		
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
