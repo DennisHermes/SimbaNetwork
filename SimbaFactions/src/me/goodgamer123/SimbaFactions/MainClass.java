@@ -20,6 +20,7 @@ public class MainClass extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new DisableBuilding(), this);
 		getServer().getPluginManager().registerEvents(new ProjectileTrails(), this);
 		getServer().getPluginManager().registerEvents(new DeathEffect(), this);
+		getServer().getPluginManager().registerEvents(new AntiSelfBow(), this);
 
 		getCommand("togglebuilding").setExecutor(this);
 		
