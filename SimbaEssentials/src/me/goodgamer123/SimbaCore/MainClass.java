@@ -1,4 +1,4 @@
-package me.goodgamer123.SimbaEssentials;
+package me.goodgamer123.SimbaCore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,6 +16,8 @@ public class MainClass extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+
+		getServer().getPluginManager().registerEvents(new BlockNamespacedCommands(), this);
 		
 		FileConfiguration config = this.getConfig();
 		config.addDefault("IpWhitelist", false);
@@ -38,7 +40,7 @@ public class MainClass extends JavaPlugin {
 						new BukkitRunnable() { 
 							@Override
 							public void run() {
-								sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6SIKE!"));
+								sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6SimbaShield&f>> &eHej &7" + sender.getName() + "&e, ti bas ti! Stvarno mislis da sam toliko glup da cu ti dati &cOP&e? &6-_-"));
 							}
 						}.runTaskLater(MainClass.getPlugin(MainClass.class), 200);
 					}
