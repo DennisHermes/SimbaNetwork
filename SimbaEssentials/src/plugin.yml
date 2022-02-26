@@ -8,3 +8,7 @@ description: SimbaCore.
 commands:
   op:
     description: op players.
+  screenshare:
+    description: screen share.
+    permission: screenshare.screenshare
+    aliases: [ss]
