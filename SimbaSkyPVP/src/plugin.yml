@@ -6,6 +6,6 @@ author: goodgamer123
 description: SimbaSkyPVP.
 
 commands:
-  togglebuilding:
-    description: toggle building.
-    permission: disablebuilding.togglebuilding
+  gradi:
+    description: gradi.
+    permission: gradi.gradi

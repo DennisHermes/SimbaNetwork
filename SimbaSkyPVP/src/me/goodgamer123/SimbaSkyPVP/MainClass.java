@@ -24,6 +24,9 @@ public class MainClass extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new PermanentAnvil(), this);
 		getServer().getPluginManager().registerEvents(new VoidKiller(), this);
 		getServer().getPluginManager().registerEvents(new AntiSelfBow(), this);
+		getServer().getPluginManager().registerEvents(new DeathMessages(), this);
+		
+		getCommand("gradi").setExecutor(this);
 		
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
@@ -49,6 +52,7 @@ public class MainClass extends JavaPlugin {
 						if (p.getInventory().getItem(slot) != null) {
 						    if (p.getInventory().getItem(slot).getType().equals(Material.EGG) && p.getInventory().getItem(slot).getItemMeta().getLore() == null) {
 						    	int amount = 1;
+						    	amount = p.getInventory().getItem(slot).getAmount();
 						    	ItemStack egg = new ItemStack(Material.EGG);
 						    	ItemMeta eggMeta = egg.getItemMeta();
 						    	eggMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&8[&e&lEksplozivna Jaja&8]"));
@@ -64,7 +68,9 @@ public class MainClass extends JavaPlugin {
 						}
 					}
 				}
+				
 			}
+			
 		}, 20L, 20L);
 	}
 	
@@ -75,13 +81,13 @@ public class MainClass extends JavaPlugin {
 		}
 		
 		Player p = (Player) sender;
-		if (cmd.getName().equalsIgnoreCase("togglebuilding")) {
+		if (cmd.getName().equalsIgnoreCase("gradi")) {
 			if (!DisableBuilding.building.contains(p)) {
 				DisableBuilding.building.add(p);
-				p.sendMessage(ChatColor.GREEN + "Buidling is now disabled!");
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &cIskljucen&e."));
 			} else {
 				DisableBuilding.building.remove(p);
-				p.sendMessage(ChatColor.GREEN + "Buidling is now enabled!");
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &aUkljucen&e."));
 			}
 		}
 		
