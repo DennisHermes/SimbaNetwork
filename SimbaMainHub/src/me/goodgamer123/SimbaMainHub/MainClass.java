@@ -20,6 +20,8 @@ public class MainClass extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new JoinParticles(), this);
 		getServer().getPluginManager().registerEvents(new AntiEastereggLooter(), this);
 		
+		getCommand("gradi").setExecutor(this);
+		
 		FileConfiguration config = this.getConfig();
 		config.addDefault("IpWhitelist", false);
 		config.options().copyDefaults(true);
@@ -100,13 +102,13 @@ public class MainClass extends JavaPlugin {
 		
 		Player p = (Player) sender;
 		
-		if (cmd.getName().equalsIgnoreCase("togglebuilding")) {
+		if (cmd.getName().equalsIgnoreCase("gradi")) {
 			if (!DisableBuilding.building.contains(p)) {
 				DisableBuilding.building.add(p);
-				p.sendMessage(ChatColor.GREEN + "Buidling is now disabled!");
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &cIskljucen&e."));
 			} else {
 				DisableBuilding.building.remove(p);
-				p.sendMessage(ChatColor.GREEN + "Buidling is now enabled!");
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &aUkljucen&e."));
 			}
 		}
 		

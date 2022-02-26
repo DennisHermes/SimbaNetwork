@@ -6,9 +6,9 @@ author: goodgamer123
 description: Shows particles on join.
 
 commands:
-  togglebuilding:
-    description: toggle building.
-    permission: disablebuilding.togglebuilding
+  gradi:
+    description: gradi.
+    permission: gradi.gradi
   ipwhitelist:
     description: ip whitelist.
     permission: ipwhitelist.ipwhitelist
