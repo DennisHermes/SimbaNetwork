@@ -1,12 +1,21 @@
 package me.goodgamer123.SimbaMainHub;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
@@ -29,7 +38,7 @@ public class JoinParticles implements Listener {
 			}
 		}.runTaskLater(MainClass.getPlugin(MainClass.class), 10);
 
-		
+//===========================================================================================================================================================================================//
 		
         PlayerConnection connection = ((CraftPlayer) e.getPlayer()).getHandle().playerConnection;
         
@@ -63,6 +72,65 @@ public class JoinParticles implements Listener {
 		        connection.sendPacket(subPacket);
 			}
 		}.runTaskLater(MainClass.getPlugin(MainClass.class), 100);
+		
+//===========================================================================================================================================================================================//
+		
+		File prefFile = new File(MainClass.getPlugin(MainClass.class).getDataFolder() + "/preferences.yml");
+		if (prefFile.exists()) {
+			FileConfiguration prefs = YamlConfiguration.loadConfiguration(prefFile);
+			if (prefs.get(e.getPlayer().getUniqueId().toString()) != null) {
+				
+				if (prefs.getBoolean(e.getPlayer().getUniqueId().toString() + ".Speed")) {
+					e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
+				}
+				
+				if (prefs.getBoolean(e.getPlayer().getUniqueId().toString() + ".Hide players")) {
+					for (Player p1 : Bukkit.getOnlinePlayers()) {
+						e.getPlayer().hidePlayer(p1);
+					}
+				}
+				
+				if (prefs.getBoolean(e.getPlayer().getUniqueId().toString() + ".Mute sound")) {
+					e.getPlayer().setAllowFlight(true);
+				}
+				
+				if (prefs.getBoolean(e.getPlayer().getUniqueId().toString() + ".Double jump")) {
+					e.getPlayer().setAllowFlight(true);
+				}
+				
+			} else {
+				prefs.set(e.getPlayer().getUniqueId().toString() + ".Speed", true);
+				prefs.set(e.getPlayer().getUniqueId().toString() + ".Hide players", false);
+				prefs.set(e.getPlayer().getUniqueId().toString() + ".Mute sound", false);
+				prefs.set(e.getPlayer().getUniqueId().toString() + ".Anti knockback", false);
+				prefs.set(e.getPlayer().getUniqueId().toString() + ".Double jump", true);
+				try {
+					prefs.save(prefFile);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} else {
+			MainClass.getPlugin(MainClass.class).getDataFolder().mkdirs();
+			FileConfiguration prefs = YamlConfiguration.loadConfiguration(prefFile);
+			prefs.set(e.getPlayer().getUniqueId().toString() + ".Speed", true);
+			prefs.set(e.getPlayer().getUniqueId().toString() + ".Hide players", false);
+			prefs.set(e.getPlayer().getUniqueId().toString() + ".Mute sound", false);
+			prefs.set(e.getPlayer().getUniqueId().toString() + ".Anti knockback", false);
+			prefs.set(e.getPlayer().getUniqueId().toString() + ".Double jump", true);
+			try {
+				prefs.save(prefFile);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		FileConfiguration prefs = YamlConfiguration.loadConfiguration(prefFile);
+		for (Player p1 : Bukkit.getOnlinePlayers()) {
+			if (prefs.getBoolean(p1.getUniqueId().toString() + ".Hide players")) {
+				p1.hidePlayer(e.getPlayer());
+			}
+		}
 		
 	}
 	

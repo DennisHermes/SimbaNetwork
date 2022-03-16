@@ -19,8 +19,16 @@ public class MainClass extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new IpWhitelist(), this);
 		getServer().getPluginManager().registerEvents(new JoinParticles(), this);
 		getServer().getPluginManager().registerEvents(new AntiEastereggLooter(), this);
+		getServer().getPluginManager().registerEvents(new DoubleJump(), this);
+		getServer().getPluginManager().registerEvents(new LobbyPreferences(), this);
 		
 		getCommand("gradi").setExecutor(this);
+		
+		getCommand("togglespeed").setExecutor(new LobbyPreferences());
+		getCommand("toggleplayers").setExecutor(new LobbyPreferences());
+		getCommand("togglesounds").setExecutor(new LobbyPreferences());
+		getCommand("togglekb").setExecutor(new LobbyPreferences());
+		getCommand("toggledj").setExecutor(new LobbyPreferences());
 		
 		FileConfiguration config = this.getConfig();
 		config.addDefault("IpWhitelist", false);

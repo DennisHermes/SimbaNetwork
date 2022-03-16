@@ -7,8 +7,18 @@ description: Shows particles on join.
 
 commands:
   gradi:
-    description: gradi.
+    description: Gradi.
     permission: gradi.gradi
   ipwhitelist:
-    description: ip whitelist.
+    description: Ip whitelist.
     permission: ipwhitelist.ipwhitelist
+  togglespeed:
+    description: Toggle your speed.
+  toggleplayers:
+    description: Toggle your players.
+  togglesounds:
+    description: Toggle your sounds.
+  togglekb:
+    description: Toggle your knockback.
+  toggledj:
+    description: Toggle your double jump.
