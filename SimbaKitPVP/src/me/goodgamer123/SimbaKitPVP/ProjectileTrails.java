@@ -1,4 +1,4 @@
-package me.goodgamer123.SimbaSkyPVP;
+package me.goodgamer123.SimbaKitPVP;
 
 import java.util.HashMap;
 import java.util.Map;

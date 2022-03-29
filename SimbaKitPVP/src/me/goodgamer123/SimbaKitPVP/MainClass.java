@@ -1,4 +1,4 @@
-package me.goodgamer123.SimbaSkyPVP;
+package me.goodgamer123.SimbaKitPVP;
 
 import java.util.ArrayList;
 
@@ -21,6 +21,7 @@ public class MainClass extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new ProjectileTrails(), this);
 		getServer().getPluginManager().registerEvents(new DeathEffect(), this);
 		getServer().getPluginManager().registerEvents(new AntiSelfBow(), this);
+		getServer().getPluginManager().registerEvents(new SignClick(), this);
 		
 		getCommand("gradi").setExecutor(this);
 		
@@ -77,10 +78,10 @@ public class MainClass extends JavaPlugin {
 		if (cmd.getName().equalsIgnoreCase("gradi")) {
 			if (!DisableBuilding.building.contains(p)) {
 				DisableBuilding.building.add(p);
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &cIskljucen&e."));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &aUkljucen&e."));
 			} else {
 				DisableBuilding.building.remove(p);
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &aUkljucen&e."));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &cIskljucen&e."));
 			}
 		}
 		

@@ -1,4 +1,4 @@
-package me.goodgamer123.SimbaSkyPVP;
+package me.goodgamer123.SimbaKitPVP;
 
 import java.util.ArrayList;
 
@@ -15,14 +15,14 @@ public class DisableBuilding implements Listener {
 	@EventHandler
 	public void blockPlace(BlockPlaceEvent e) {
 		if (e.getPlayer().isOp()) {
-			if (building.contains(e.getPlayer())) e.setCancelled(true);
+			if (!building.contains(e.getPlayer())) e.setCancelled(true);
 		}
 	}
 	
 	@EventHandler
 	public void blockBreak(BlockBreakEvent e) {
 		if (e.getPlayer().isOp()) {
-			if (building.contains(e.getPlayer())) e.setCancelled(true);
+			if (!building.contains(e.getPlayer())) e.setCancelled(true);
 		}
 	}
 	
