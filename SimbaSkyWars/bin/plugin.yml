@@ -1,0 +1,11 @@
+main: me.goodgamer123.SimbaSkyWars.MainClass
+name:  SimbaSkyWars
+version: 1.2.0
+api-version: 1.8
+author: goodgamer123
+description: SimbaSkyWars.
+
+commands:
+  gradi:
+    description: gradi.
+    permission: gradi.gradi
