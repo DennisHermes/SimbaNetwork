@@ -25,6 +25,7 @@ public class MainClass extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new VoidKiller(), this);
 		getServer().getPluginManager().registerEvents(new AntiSelfBow(), this);
 		getServer().getPluginManager().registerEvents(new DeathMessages(), this);
+		getServer().getPluginManager().registerEvents(new SignClick(), this);
 		
 		getCommand("gradi").setExecutor(this);
 		
@@ -84,10 +85,10 @@ public class MainClass extends JavaPlugin {
 		if (cmd.getName().equalsIgnoreCase("gradi")) {
 			if (!DisableBuilding.building.contains(p)) {
 				DisableBuilding.building.add(p);
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &cIskljucen&e."));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &aUkljucen&e."));
 			} else {
 				DisableBuilding.building.remove(p);
-				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &aUkljucen&e."));
+				p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Kontrola&f>> &eMod za postavljanje/razbijanje blokova je sada: &cIskljucen&e."));
 			}
 		}
 		
